@@ -133,7 +133,29 @@
 
 -(void) noteKeyEvent:(KCKeystroke*)keystroke
 {
-	_displayedString = [[keystroke convertToString] retain];
+    const int max_record_key_length = 20;
+    if(_displayedString != nil) {
+        [_displayedString release];
+    }
+    if ([keystroke isCommand]){
+        _displayedString = [[keystroke convertToString] retain];
+        _isCommandKey = true;
+    }
+    else {
+        if(_displayedString == nil || [_displayedString length] >= max_record_key_length) {
+            _displayedString = [[keystroke convertToString] retain];
+        }
+        else if ([_displayedString length] < max_record_key_length) {
+            if(_isCommandKey) {
+                _displayedString = [keystroke convertToString];
+            } else {
+                 _displayedString = [_displayedString stringByAppendingString:[keystroke convertToString]];
+            }
+           
+            [_displayedString retain];
+        }
+        _isCommandKey = false;
+    }
 	[self setNeedsDisplay:YES];
 }
 
@@ -201,8 +223,6 @@
 
 -(void) noteKeyEvent:(KCKeystroke*)keystroke
 {
-//	if (![keystroke isCommand])
-//		return;
 	[_visualizerView noteKeyEvent:keystroke];
 }
 

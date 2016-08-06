@@ -41,7 +41,8 @@
 @interface SvelteVisualizerView : NSView
 {
 	uint32_t _flags;
-	NSString* _displayedString;
+    NSString* _displayedString;
+    BOOL _isCommandKey;
 }
 
 -(void) noteKeyEvent:(KCKeystroke*)keystroke;
