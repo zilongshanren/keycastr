@@ -69,10 +69,10 @@
 	NSMutableParagraphStyle* ps = [[NSMutableParagraphStyle alloc] init];
 	[ps setAlignment:NSCenterTextAlignment];
 	
-	NSString* shiftKeyString = [NSString stringWithUTF8String:"\xe2\x87\xa7\x01"];
-	NSString* controlKeyString = [NSString stringWithUTF8String:"\xe2\x8c\x83\x01"];
-	NSString* altKeyString = [NSString stringWithUTF8String:"\xe2\x8c\xa5\x01"];
-	NSString* commandKeyString = [NSString stringWithUTF8String:"\xe2\x8c\x98\x01"];
+	NSString* shiftKeyString = [NSString stringWithUTF8String:"Shift"];
+	NSString* controlKeyString = [NSString stringWithUTF8String:"Ctrl"];
+	NSString* altKeyString = [NSString stringWithUTF8String:"Alt"];
+	NSString* commandKeyString = [NSString stringWithUTF8String:"Super"];
 	NSShadow* shadow = [[[NSShadow alloc] init] autorelease];
 	[shadow setShadowColor:[NSColor blackColor]];
 	[shadow setShadowBlurRadius:2];
@@ -158,7 +158,7 @@
 	if (!(self = [super init]))
 		return nil;
 
-	NSRect r = { 10, 10, 200, 100 };
+	NSRect r = { 10, 10, 1024, 100 };
 	_visualizerWindow = [[NSWindow alloc]
 		initWithContentRect:r
 		styleMask:NSBorderlessWindowMask
@@ -201,8 +201,8 @@
 
 -(void) noteKeyEvent:(KCKeystroke*)keystroke
 {
-	if (![keystroke isCommand])
-		return;
+//	if (![keystroke isCommand])
+//		return;
 	[_visualizerView noteKeyEvent:keystroke];
 }
 

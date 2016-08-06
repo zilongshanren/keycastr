@@ -49,10 +49,10 @@ static NSString* kShiftKeyString = nil;
 +(void) load
 {
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-	kControlKeyString = [[NSString stringWithUTF8String:"\xe2\x8c\x83"] retain];
-	kAltKeyString = [[NSString stringWithUTF8String:"\xe2\x8c\xa5"] retain];
-	kCommandKeyString = [[NSString stringWithUTF8String:"\xe2\x8c\x98"] retain];
-	kShiftKeyString = [[NSString stringWithUTF8String:"\xe2\x87\xa7"] retain];
+	kControlKeyString = [[NSString stringWithUTF8String:"Ctrl + "] retain];
+	kAltKeyString = [[NSString stringWithUTF8String:"Alt + "] retain];
+	kCommandKeyString = [[NSString stringWithUTF8String:"Super + "] retain];
+	kShiftKeyString = [[NSString stringWithUTF8String:"Shift + "] retain];
 	[pool release];
 }
 
