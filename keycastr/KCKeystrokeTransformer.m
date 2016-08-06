@@ -246,7 +246,7 @@ static NSString* kShiftKeyString = nil;
 	// If this is a command string, put it in uppercase.
 	if (isCommand)
 	{
-		NSMutableString *t = [[s uppercaseString] mutableCopy];
+		NSMutableString *t = [s mutableCopy];
         s = [t autorelease];
 	}
 	
