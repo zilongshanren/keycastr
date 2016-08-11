@@ -134,28 +134,20 @@
 -(void) noteKeyEvent:(KCKeystroke*)keystroke
 {
     const int max_record_key_length = 20;
-    if(_displayedString != nil) {
-        [_displayedString release];
-    }
-    if ([keystroke isCommand]){
+
+    
+    if(_displayedString == nil || [_displayedString length] >= max_record_key_length) {
+        if(_displayedString != nil) {
+            [_displayedString release];
+            _displayedString = nil;
+        }
         _displayedString = [[keystroke convertToString] retain];
-        _isCommandKey = true;
     }
-    else {
-        if(_displayedString == nil || [_displayedString length] >= max_record_key_length) {
-            _displayedString = [[keystroke convertToString] retain];
-        }
-        else if ([_displayedString length] < max_record_key_length) {
-            if(_isCommandKey) {
-                _displayedString = [keystroke convertToString];
-            } else {
-                 _displayedString = [_displayedString stringByAppendingString:[keystroke convertToString]];
-            }
-           
-            [_displayedString retain];
-        }
-        _isCommandKey = false;
+    else if ([_displayedString length] < max_record_key_length) {
+        _displayedString = [_displayedString stringByAppendingString:[keystroke convertToString]];
+        [_displayedString retain];
     }
+
 	[self setNeedsDisplay:YES];
 }
 
@@ -180,7 +172,7 @@
 	if (!(self = [super init]))
 		return nil;
 
-	NSRect r = { 10, 10, 1024, 100 };
+	NSRect r = { 10, 10, 512, 100 };
 	_visualizerWindow = [[NSWindow alloc]
 		initWithContentRect:r
 		styleMask:NSBorderlessWindowMask
